@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4 
@@ -20,19 +20,6 @@ jobs:
         role-to-assume: arn:aws:iam::550761455669:role/github-deploy-admin-role
         aws-region: us-east-2
 
-    # - name: Set up Docker Buildx
-    #   uses: docker/setup-buildx-action@v1
-
-    # - name: Configure Docker to use AWS ECR registry
-    #   run: | 
-    #     echo "{\"credsStore\": \"ecr-login\"}" > $HOME/.docker/config.json
-    
-    # - name: Configure AWS CLI
-    #   run: |
-    #     aws configure set aws_access_key_id value ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     aws configure set aws_secret_access_key value ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     aws configure set region value ${{ secrets.AWS_REGION }}
-    
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v2
@@ -45,3 +32,4 @@ jobs:
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
         docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+    
