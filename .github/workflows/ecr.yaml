@@ -23,9 +23,9 @@ jobs:
     
     - name: Configure AWS CLI
       run: |
-        aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws configure set region ${{ secrets.AWS_REGION }}
+        aws configure set aws_access_key_id value ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws configure set aws_secret_access_key value ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws configure set region value ${{ secrets.AWS_REGION }}
     
     - name: Login to AWS ECR
       run: aws ecr get-login-password | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
