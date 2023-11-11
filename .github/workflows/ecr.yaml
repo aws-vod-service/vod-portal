@@ -6,6 +6,10 @@ on:
       branches:
         - main  # replace with your branch name
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
